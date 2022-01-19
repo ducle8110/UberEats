@@ -1,19 +1,20 @@
 import React from 'react';
 import {View, Text, Image, StyleSheet} from 'react-native';
 
-const yelpRestaurantInfo = {};
-const {name, image, price, reviews, rating, categories} = yelpRestaurantInfo;
-const formattedCategories = categories.map(cat => cat.title.join(' ・'));
-const description = `${formattedCategories} ${
-  price ? ' • ' + price : ''
-} • 🎫 • ${rating} ⭐ (${reviews}+)`;
-
 export default function About(props) {
+  const {name, image, price, reviews, rating, categories} = props.route.params;
+
+  const formattedCategories = categories.map(cat => cat.title).join(' • ');
+
+  const description = `${formattedCategories} ${
+    price ? ' • ' + price : ''
+  } • 🎫 • ${rating} ⭐ (${reviews}+)`;
+
   return (
     <View>
       <RestaurantImage image={image} />
       <RestaurantName title={name} />
-      <RestaurantDescription description="aaaaaaaaaaaa bbbbbbbbb ccccccccc" />
+      <RestaurantDescription description={description} />
     </View>
   );
 }

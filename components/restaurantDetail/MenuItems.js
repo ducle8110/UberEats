@@ -2,19 +2,18 @@ import {View, Text, StyleSheet, Image, ScrollView} from 'react-native';
 import React from 'react';
 import {Divider} from 'react-native-elements';
 
-const foods = {};
-export default function MenuItems() {
+export default function MenuItems({restaurantName, foods}) {
   return (
     <ScrollView showsVerticalScrollIndicator={false}>
-      {foods.map((food, index) => {
+      {foods.map((food, index) => (
         <View key={index}>
           <View style={styles.menuItemContainer}>
             <FoodInfo food={food} />
             <FoodImage food={food} />
           </View>
           <Divider width={0.5} orientation="vertical" style={styles.divider} />
-        </View>;
-      })}
+        </View>
+      ))}
     </ScrollView>
   );
 }
@@ -27,8 +26,8 @@ const FoodInfo = props => (
 );
 
 const FoodImage = props => (
-  <View style={styles.image}>
-    <Image source={{uri: props.food.image}} />
+  <View>
+    <Image style={styles.image} source={{uri: props.food.image}} />
   </View>
 );
 
@@ -50,6 +49,7 @@ const styles = StyleSheet.create({
     width: 100,
     height: 100,
     borderRadius: 10,
+    marginRight: 40,
   },
   divider: {
     marginHorizontal: 20,
