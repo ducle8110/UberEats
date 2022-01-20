@@ -1,12 +1,16 @@
 npm i react-native-google-places-autocomplete
-npm i react-native-vector-icons
-npm i react-native-axios
+npm i react-native-vector-icons //アイコン(Ant、FontAwesome5、Ionicons...)
+npm i react-native-axios //API呼び出す
 npm install react-native-elements
-npm i @react-navigation/native
-npm install @react-navigation/stack
+npm i @react-navigation/native //ページ遷移
+npm install @react-navigation/stack //ページ遷移
 npm install react-native-screens react-native-safe-area-context @react-native-community/masked-view
-npm i react-native-gesture-handler@2.1.1 ⇒最新版NG
+npm i react-native-gesture-handler@2.1.1 ⇒最新版NG ドラッグにて戻る
 npm i react-native-reanimated@2.2.4 ⇒最新版NG
+npm i react-native-bouncy-checkbox //チェックボックス
+npm i tslib
+npm install react-redux //State管理
+npm i reanimated-bottom-sheet //下からメニューバーを出す
 
 npx react-native start --port=8088 --reset-cache
 npx react-native run-android --port 8088

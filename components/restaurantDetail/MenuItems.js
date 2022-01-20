@@ -1,13 +1,40 @@
 import {View, Text, StyleSheet, Image, ScrollView} from 'react-native';
 import React from 'react';
 import {Divider} from 'react-native-elements';
+import BouncyCheckbox from 'react-native-bouncy-checkbox';
+import {useDispatch} from 'react-redux';
+import {useSelector} from 'react-redux';
 
 export default function MenuItems({restaurantName, foods}) {
+  const dispatch = useDispatch();
+  const selectItem = (item, checkboxValue) =>
+    dispatch({
+      type: 'ADD_TO_CART',
+      payload: {
+        ...item,
+        restaurantName: restaurantName,
+        checkboxValue: checkboxValue,
+      },
+    });
+  const items = useSelector(state => state.cartReducer.selectedItems.items);
+
   return (
-    <ScrollView showsVerticalScrollIndicator={false}>
+    <ScrollView showsVerticalScrollIndicator={false} style={styles.scrollMenu}>
       {foods.map((food, index) => (
         <View key={index}>
           <View style={styles.menuItemContainer}>
+            <BouncyCheckbox
+              onPress={checkboxValue => selectItem(food, checkboxValue)}
+              fillColor="green"
+              iconStyle={styles.checkBox}
+              isChecked={
+                items.some(
+                  item => item.checkboxValue && item.title === food.title,
+                )
+                  ? true
+                  : false
+              }
+            />
             <FoodInfo food={food} />
             <FoodImage food={food} />
           </View>
@@ -18,8 +45,8 @@ export default function MenuItems({restaurantName, foods}) {
   );
 }
 const FoodInfo = props => (
-  <View sytle={styles.foodInfoContainer}>
-    <Text style={styles.name}>{props.food.name}</Text>
+  <View style={styles.foodInfoContainer}>
+    <Text style={styles.name}>{props.food.title}</Text>
     <Text>{props.food.description}</Text>
     <Text>{props.food.price}</Text>
   </View>
@@ -32,13 +59,17 @@ const FoodImage = props => (
 );
 
 const styles = StyleSheet.create({
+  checkBox: {
+    borderColor: 'lightgray',
+    borderRadius: 0,
+  },
   foodInfoContainer: {
-    width: 240,
+    width: 220,
     justifyContent: 'space-evenly',
   },
   name: {
-    fontSize: 19,
-    fontWeight: '500',
+    fontSize: 18,
+    fontWeight: 'bold',
   },
   menuItemContainer: {
     flexDirection: 'row',
@@ -49,9 +80,11 @@ const styles = StyleSheet.create({
     width: 100,
     height: 100,
     borderRadius: 10,
-    marginRight: 40,
   },
   divider: {
     marginHorizontal: 20,
+  },
+  scrollMenu: {
+    flex: 1,
   },
 });
