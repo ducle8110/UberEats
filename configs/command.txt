@@ -11,6 +11,7 @@ npm i react-native-bouncy-checkbox //チェックボックス
 npm i tslib
 npm install react-redux //State管理
 npm i reanimated-bottom-sheet //下からメニューバーを出す
+npm i lottie-react-native //アニメーション
 
 npx react-native start --port=8088 --reset-cache
 npx react-native run-android --port 8088

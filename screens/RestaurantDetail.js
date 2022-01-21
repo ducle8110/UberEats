@@ -46,8 +46,12 @@ export default function RestaurantDetail({route, navigation}) {
     <View style={styles.container}>
       <About route={route} />
       <Divider width={1.5} />
-      <MenuItems restaurantName={route.params.name} foods={foods} />
-      <ViewCart navigation={navigation} restaurantName={route.params.name} />
+      <MenuItems
+        restaurantName={route.params.name}
+        foods={foods}
+        hideCheckbox={false}
+      />
+      <ViewCart navigation={navigation} />
     </View>
   );
 }

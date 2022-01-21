@@ -5,7 +5,7 @@ import BouncyCheckbox from 'react-native-bouncy-checkbox';
 import {useDispatch} from 'react-redux';
 import {useSelector} from 'react-redux';
 
-export default function MenuItems({restaurantName, foods}) {
+export default function MenuItems({restaurantName, foods, hideCheckbox}) {
   const dispatch = useDispatch();
   const selectItem = (item, checkboxValue) =>
     dispatch({
@@ -23,18 +23,22 @@ export default function MenuItems({restaurantName, foods}) {
       {foods.map((food, index) => (
         <View key={index}>
           <View style={styles.menuItemContainer}>
-            <BouncyCheckbox
-              onPress={checkboxValue => selectItem(food, checkboxValue)}
-              fillColor="green"
-              iconStyle={styles.checkBox}
-              isChecked={
-                items.some(
-                  item => item.checkboxValue && item.title === food.title,
-                )
-                  ? true
-                  : false
-              }
-            />
+            {hideCheckbox ? (
+              <></>
+            ) : (
+              <BouncyCheckbox
+                onPress={checkboxValue => selectItem(food, checkboxValue)}
+                fillColor="green"
+                iconStyle={styles.checkBox}
+                isChecked={
+                  items.some(
+                    item => item.checkboxValue && item.title === food.title,
+                  )
+                    ? true
+                    : false
+                }
+              />
+            )}
             <FoodInfo food={food} />
             <FoodImage food={food} />
           </View>

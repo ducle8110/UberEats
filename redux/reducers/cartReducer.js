@@ -16,12 +16,14 @@ let cartReducer = (state = defaultState, action) => {
         };
         console.log(newState);
       } else {
-        newState.selectedItems.items = [
-          ...newState.selectedItems.items.filter(
-            item => item.title !== action.payload.title,
-          ),
-        ];
-        newState.selectedItems.restaurantName = action.payload.restaurantName;
+        newState.selectedItems = {
+          items: [
+            ...newState.selectedItems.items.filter(
+              item => item.title !== action.payload.title,
+            ),
+          ],
+          restaurantName: action.payload.restaurantName,
+        };
         console.log(newState);
       }
       return newState;
